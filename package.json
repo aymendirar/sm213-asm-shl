@@ -1,0 +1,34 @@
+{
+    "name": "sm213-assembly-syntax-highlighting",
+    "displayName": "SM213 Assembly Syntax Highlighting",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.52.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "asm",
+                "aliases": [
+                    "SM213 Assembly",
+                    "asm"
+                ],
+                "extensions": [
+                    ".s"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "asm",
+                "scopeName": "source.asm",
+                "path": "./syntaxes/asm.tmLanguage.json"
+            }
+        ]
+    }
+}
