@@ -11,3 +11,7 @@ The main file we care about is `./syntaxes/asm.tmLanguage.json`. The `.json` fil
 ## Contributing
 
 I don't claim that this is good or efficient Regex. Feel free to add or correct anything :)
+
+## Known Issues
+
+-   Referencing a label that has the same name as instruction (ex. having a label for a function named 'add' and calling `j add`) will highlight the label as if it were an instruction
