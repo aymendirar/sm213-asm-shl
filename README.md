@@ -8,6 +8,14 @@ The project boilerplate was created using CLI tools `Yeoman` and `VS Code Extens
 
 The main file we care about is `./syntaxes/asm.tmLanguage.json`. The `.json` file has a bunch of fields describing the type of text to syntax highlight and uses Regex to describe what to highlight.
 
+## Screenshots
+
+### Extension off
+<img src="./assets/old.png" width=600>
+
+### Extension on
+<img src="./assets/new.png" width=600>
+
 ## Contributing
 
 I don't claim that this is good or efficient Regex. Feel free to add or correct anything :)
