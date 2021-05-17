@@ -6,4 +6,13 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
-- Initial release
+## [0.0.1] - 2021-02-01
+### Added
+- Basic working SM213 syntax highlighting
+
+
+## [1.0.0] - 2021-02-01
+### Added
+- Add missing `and` instruction for highlighting
+- Add `example/sample.s` for local testing
+- Move to an easier to manage number versioning system
