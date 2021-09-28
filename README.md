@@ -1,6 +1,6 @@
 # SM213 Assembly Syntax Highlighter Extension for VS Code
 
-This is a VS Code extension that provides syntax highlighting for the SM213 assembly lanuguage used in UBC's CPSC 213 course. The language was developed for the Simple Machine 213 Simulator by course staff and is based on x86 assembly.
+This is a VS Code extension that provides syntax highlighting for the SM213 assembly language used in UBC's CPSC 213 course. The language was developed for the Simple Machine 213 Simulator by course staff and is based on x86 assembly.
 
 ## Project
 
