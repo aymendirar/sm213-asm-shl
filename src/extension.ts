@@ -16,6 +16,33 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	context.subscriptions.push(disposable);
+	context.subscriptions.push(HOVER_DEFN);
 }
+
+// Hovering
+
+const HOVER_DEFN = vscode.languages.registerHoverProvider({ scheme: 'file', language: 'asm' }, {
+	provideHover(document, position, token) {
+		const range = document.getWordRangeAtPosition(position);
+        	const word = document.getText(range);
+		// const hoverMsg: vscode.MarkdownString = new vscode.MarkdownString().appendText('GTFO!');
+		// hoverMsg.isTrusted = true;
+		if (word in DEFN) {return new vscode.Hover(DEFN[word]);}
+		// return new vscode.Hover(hoverMsg);
+	}
+});
+
+const DEFN: {[key: string]: vscode.MarkdownString} = {
+	// Format:
+	halt : new vscode.MarkdownString()
+		.appendCodeblock('halt', 'asm')
+		.appendText(`\n`)
+		.appendMarkdown('(stop execution)'),
+	nop : new vscode.MarkdownString()
+		.appendCodeblock('nop', 'asm')
+		.appendText(`\n`)
+		.appendMarkdown('(stop execution)'),
+
+};
 
 export function deactivate() {}

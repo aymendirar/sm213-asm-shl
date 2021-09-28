@@ -16,7 +16,8 @@
         "Programming Languages"
     ],
     "activationEvents": [
-        "onCommand:sm213-assembly-syntax-highlighting.credit"
+        "onCommand:sm213-assembly-syntax-highlighting.credit",
+        "onLanguage:asm"
 	],
     "main": "./out/extension.js",
     "contributes": {
