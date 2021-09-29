@@ -33,16 +33,35 @@ const HOVER_DEFN = vscode.languages.registerHoverProvider({ scheme: 'file', lang
 });
 
 const DEFN: {[key: string]: vscode.MarkdownString} = {
-	// Format:
-	halt : new vscode.MarkdownString()
-		.appendCodeblock('halt', 'asm')
-		.appendText(`\n`)
-		.appendMarkdown('(stop execution)'),
-	nop : new vscode.MarkdownString()
-		.appendCodeblock('nop', 'asm')
-		.appendText(`\n`)
-		.appendMarkdown('(stop execution)'),
+	
+	ld : opcodeDesc('ld', 'load from memory'),
+	st: opcodeDesc('st','store into memory'),
+	mov: opcodeDesc('mov','move between registers'),
+	add: opcodeDesc('add', 'add integers'),
+	and: opcodeDesc('and','bitwise logical and of two 32-bit values'),
+	inc: opcodeDesc('inc', 'increment an integer'),
+	inca: opcodeDesc('inca','add four to an integer (increment word address)'),
+	dec: opcodeDesc('dec','decrement an integer'),
+	deca: opcodeDesc('deca','subtract four from integer (decrement word address)'),
+	not: opcodeDesc('not','bitwise compliment (i.e., not) of 32-bit value'),
+	gpc: opcodeDesc('gpc','get value of program counter'),
+	shr: opcodeDesc('shr', 'shift right'),
+	shl: opcodeDesc('shl','shift left'),
+	br: opcodeDesc('br','unconditional branch'),
+	beq: opcodeDesc('beq', 'branch when equal to zero'),
+	bgt: opcodeDesc('bgt','branch when greater than zero'),
+	j: opcodeDesc('j','unconditional jump'),
+	halt : opcodeDesc('halt', 'stop processor'),
+	nop : opcodeDesc('nop', 'do nothing'),
+};
 
+function opcodeDesc(opcode: string, desc: string) {
+	// desc is a short (<10 word) description
+	// taken from page 19 of companion
+	return new vscode.MarkdownString()
+		.appendCodeblock(opcode, 'asm')
+		.appendText(`\n`)
+		.appendMarkdown(desc);
 };
 
 export function deactivate() {}
