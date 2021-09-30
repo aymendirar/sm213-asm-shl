@@ -151,7 +151,7 @@ class Opcode {
     }
     this.markdownDesc = new vscode.MarkdownString()
       .appendCodeblock(heading, "asm")
-      .appendText(`\n`) // TODO: Try change it to appendMarkdown(<hr>)?
+      .appendMarkdown("\n --- \n") // insert horizontal rule
       .appendMarkdown(this.description);
   }
 }
