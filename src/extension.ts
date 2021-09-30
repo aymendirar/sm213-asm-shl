@@ -114,22 +114,52 @@ const OPCODES = new Map<OpcodeName, Opcode>([
 			arg2: new Argument('dest', ['base+offset', 'indexed'])
 		})],
 	['halt', new Opcode('halt', 'stops execution')],
-	['mov', new Opcode('mov', 'moves value from register $1 to $2',
+	['mov', new Opcode('mov', 'moves value from register $1 to register $2',
 		{
 			arg1: new Argument('source', ['register']),
 			arg2: new Argument('dest', ['register'])
 		})],
 	['nop', new Opcode('nop', 'no operation')],
-	['add', new Opcode('add', 'add integer stored in $1 and $2, stores result in $2',
+	['add', new Opcode('add', 'add integer stored in $1 and $2',
 		{
-			arg1: new Argument('val', ['register']),
-			arg2: new Argument('val', ['register'])
+			arg1: new Argument('source', ['register']),
+			arg2: new Argument('dest', ['register'])
 		})],
-	['and', new Opcode('and', 'performs bitwise logical and between $1 and $2, stores result in $2',
+	['and', new Opcode('and', 'performs bitwise logical and between $1 and $2',
 		{
 			arg1: new Argument('val1', ['register']),
 			arg2: new Argument('val2', ['register'])
-		})]
+		})],
+	['not', new Opcode('not', 'performs bitwise logical not on value stored in $1',
+		{
+			arg1: new Argument('val1', ['register']),
+		})],
+	['shl', new Opcode('shl', 'logical left shift value stored in $2 by $1',
+		{
+			arg1: new Argument('val', ['immediate']),
+			arg2: new Argument('dest', ['register'])
+		})],
+	['shr', new Opcode('shr', 'logical right shift value stored in $2 by $1',
+		{
+			arg1: new Argument('val', ['immediate']),
+			arg2: new Argument('dest', ['register'])
+		})],
+	['inc', new Opcode('inc', 'increments value stored in $1 by 1',
+		{
+			arg1: new Argument('val1', ['register']),
+		})],
+	['inca', new Opcode('inca', 'increments value stored in $1 by 4',
+		{
+			arg1: new Argument('val1', ['register']),
+		})],
+	['dec', new Opcode('dec', 'decrements value stored in $1 by 1',
+		{
+			arg1: new Argument('val1', ['register']),
+		})],
+	['deca', new Opcode('deca', 'decrements value stored in $1 by 4',
+		{
+			arg1: new Argument('val1', ['register']),
+		})],
 ]);
 
 export function deactivate() { }
