@@ -21,8 +21,9 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(HOVER_DEFN);
 }
 
-// Hovering
+// Below Part of the code is for implementation of Hovering
 
+/** hover provider for SM213 Opcode definitions */
 const HOVER_DEFN = vscode.languages.registerHoverProvider(
   { scheme: "file", language: "asm" },
   {
@@ -39,6 +40,7 @@ const HOVER_DEFN = vscode.languages.registerHoverProvider(
   }
 );
 
+// Added to leverage strict type checking by typescript (prevent typo)
 type AddressingMode = "immediate" | "register" | "base+offset" | "indexed";
 
 const opcodeNames = [
@@ -69,20 +71,33 @@ function isOpcodeName(x: string): x is OpcodeName {
   return (opcodeNames as readonly string[]).indexOf(x) >= 0;
 }
 
+/**
+ * Signature of an instruction
+ * 
+ * containing information of input argument(s)
+ */
 type Signature = {
   arg1?: Argument;
   arg2?: Argument;
 };
 
+/**
+ * Class representing an input argument of an SM213 instruction
+ */
 class Argument {
+	/** name of the argument */
   argName: string;
   addressingModes: AddressingMode[];
+	/** description of the argument
+	 * 
+	 * Format: <argName: addressingMode1/addressingMode2...> 
+	 */
   desc: string;
   constructor(argName: string, modes: AddressingMode[]) {
     this.argName = argName;
     this.addressingModes = modes;
-    // Update desc
-    // in the format of <argName: mode1/mode2/mode3>
+    // Generate desc
+    // in the format of <argName: mode1/mode2...>
     this.desc = `<${this.argName}: `;
     for (const mode of modes) {
       this.desc += `${mode}/`;
@@ -91,17 +106,29 @@ class Argument {
   }
 }
 
+/**
+ * Class representing an Opcode
+ */
 class Opcode {
   name: OpcodeName;
   signature?: Signature;
-  // TODO: add TsDoc for description as it is not a too obvious one.
+  /** 
+	 * Description of the Opcode
+	 * 
+	 * It will be displayed as the second part of the hover preview
+	 */
   description: string;
   markdownDesc: vscode.MarkdownString;
+
+	/**
+	 * 
+	 * @param description description of the Opcode, for which $1, $2 are used as placeholder for argument names
+	 */
   constructor(name: OpcodeName, description: string, signature?: Signature) {
     this.name = name;
     this.signature = signature;
     this.description = description;
-    // Update description from signature
+    // Format description from signature
     if (this.signature?.arg1) {
       this.description = this.description.replace(
         "$1",
@@ -115,7 +142,7 @@ class Opcode {
       );
     }
 
-    // Update markdownDesc
+    // Generate markdownDesc
     let heading = this.name;
     if (this.signature?.arg1) {
       heading += ` ${this.signature?.arg1.desc}`;
@@ -125,7 +152,6 @@ class Opcode {
     }
     this.markdownDesc = new vscode.MarkdownString()
       .appendCodeblock(heading, "asm")
-      // if it doesn't format properly, change above to appendText()
       .appendText(`\n`) // TODO: Try change it to appendMarkdown(<hr>)?
       .appendMarkdown(this.description);
   }
