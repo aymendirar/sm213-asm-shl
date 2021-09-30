@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
 export function activate(context: vscode.ExtensionContext) {
-	
+
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "SM213" is now active!');
@@ -24,7 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
 const HOVER_DEFN = vscode.languages.registerHoverProvider({ scheme: 'file', language: 'asm' }, {
 	provideHover(document, position, token) {
 		const range = document.getWordRangeAtPosition(position);
-        	const word = document.getText(range);
+		const word = document.getText(range);
 		// const hoverMsg: vscode.MarkdownString = new vscode.MarkdownString().appendText('GTFO!');
 		// hoverMsg.isTrusted = true;
 		if (isOpcodeName(word) && OPCODES.has(word)) {
@@ -37,8 +37,8 @@ const HOVER_DEFN = vscode.languages.registerHoverProvider({ scheme: 'file', lang
 type AddressingMode = 'immediate' | 'register' | 'base+offset' | 'indexed';
 
 const opcodeNames = ['ld', 'st', 'mov', 'add', 'and', "inc", "inca"
-		,'dec', 'deca', 'not', 'gpc', 'shr', 'shl'
-		,'br', 'beq', 'bgt', 'j', 'halt', 'nop'] as const;
+	, 'dec', 'deca', 'not', 'gpc', 'shr', 'shl'
+	, 'br', 'beq', 'bgt', 'j', 'halt', 'nop'] as const;
 
 type OpcodeName = typeof opcodeNames[number];
 function isOpcodeName(x: string): x is OpcodeName {
@@ -64,7 +64,7 @@ class Argument {
 		for (const mode of modes) {
 			this.desc += `${mode}/`;
 		}
-		this.desc = this.desc.replace(/.$/,">");
+		this.desc = this.desc.replace(/.$/, ">");
 	}
 };
 
@@ -95,31 +95,41 @@ class Opcode {
 			heading += ` ${this.signature?.arg2.desc}`;
 		}
 		this.markdownDesc = new vscode.MarkdownString()
-			.appendCodeblock(heading, 'asm') 
+			.appendCodeblock(heading, 'asm')
 			// if it doesn't format properly, change above to appendText()
 			.appendText(`\n`) // TODO: Try change it to appendMarkdown(<hr>)?
-			.appendMarkdown(this.description);	
+			.appendMarkdown(this.description);
 	}
 }
 
 const OPCODES = new Map<OpcodeName, Opcode>([
 	['ld', new Opcode('ld', 'loads value from $1 to $2',
-			 {arg1: new Argument('val', ['immediate','base+offset','indexed']),
-			arg2: new Argument('dest', ['register'])})],
+		{
+			arg1: new Argument('val', ['immediate', 'base+offset', 'indexed']),
+			arg2: new Argument('dest', ['register'])
+		})],
 	['st', new Opcode('st', 'stores value from register $1 to memory address $2',
-			{arg1: new Argument('source', ['register']),
-			arg2: new Argument('dest', ['base+offset', 'indexed'])})],
+		{
+			arg1: new Argument('source', ['register']),
+			arg2: new Argument('dest', ['base+offset', 'indexed'])
+		})],
 	['halt', new Opcode('halt', 'stops execution')],
 	['mov', new Opcode('mov', 'moves value from register $1 to $2',
-			{arg1: new Argument('source', ['register']),
-			arg2: new Argument('dest', ['register'])})],
+		{
+			arg1: new Argument('source', ['register']),
+			arg2: new Argument('dest', ['register'])
+		})],
 	['nop', new Opcode('nop', 'no operation')],
 	['add', new Opcode('add', 'add integer stored in $1 and $2, stores result in $2',
-			{arg1: new Argument('val', ['register']),
-			arg2: new Argument('val', ['register'])})],
+		{
+			arg1: new Argument('val', ['register']),
+			arg2: new Argument('val', ['register'])
+		})],
 	['and', new Opcode('and', 'performs bitwise logical and between $1 and $2, stores result in $2',
-			{arg1: new Argument('val1', ['register']),
-			arg2: new Argument('val2', ['register'])})]
+		{
+			arg1: new Argument('val1', ['register']),
+			arg2: new Argument('val2', ['register'])
+		})]
 ]);
 
-export function deactivate() {}
+export function deactivate() { }
