@@ -5,21 +5,20 @@ export function activate(context: vscode.ExtensionContext) {
   // This line of code will only be executed once when your extension is activated
   console.log('Congratulations, your extension "SM213" is now active!');
 
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with registerCommand
-  // The commandId parameter must match the command field in package.json
-  let disposable = vscode.commands.registerCommand(
-    "sm213-assembly-syntax-highlighting.credit",
-    () => {
-      // The code you place here will be executed every time your command is executed
-      // Display a message box to the user
-      vscode.window.showInformationMessage("0000 - 2021 Humanity!");
-    }
-  );
-
-  context.subscriptions.push(disposable);
+	
+  context.subscriptions.push(EASTER_EGG);
   context.subscriptions.push(HOVER_DEFN);
 }
+
+/** a secret */
+const EASTER_EGG = vscode.commands.registerCommand(
+  "sm213-assembly-syntax-highlighting.credit",
+  () => {
+    // Display a message box to the user
+    // Command has to be declared in package.json first
+    vscode.window.showInformationMessage("0000 - 2021 Humanity!");
+  }
+);
 
 // Below Part of the code is for implementation of Hovering
 
@@ -73,7 +72,7 @@ function isOpcodeName(x: string): x is OpcodeName {
 
 /**
  * Signature of an instruction
- * 
+ *
  * containing information of input argument(s)
  */
 type Signature = {
@@ -85,13 +84,13 @@ type Signature = {
  * Class representing an input argument of an SM213 instruction
  */
 class Argument {
-	/** name of the argument */
+  /** name of the argument */
   argName: string;
   addressingModes: AddressingMode[];
-	/** description of the argument
-	 * 
-	 * Format: <argName: addressingMode1/addressingMode2...> 
-	 */
+  /** description of the argument
+   *
+   * Format: <argName: addressingMode1/addressingMode2...>
+   */
   desc: string;
   constructor(argName: string, modes: AddressingMode[]) {
     this.argName = argName;
@@ -112,18 +111,18 @@ class Argument {
 class Opcode {
   name: OpcodeName;
   signature?: Signature;
-  /** 
-	 * Description of the Opcode
-	 * 
-	 * It will be displayed as the second part of the hover preview
-	 */
+  /**
+   * Description of the Opcode
+   *
+   * It will be displayed as the second part of the hover preview
+   */
   description: string;
   markdownDesc: vscode.MarkdownString;
 
-	/**
-	 * 
-	 * @param description description of the Opcode, for which $1, $2 are used as placeholder for argument names
-	 */
+  /**
+   *
+   * @param description description of the Opcode, for which $1, $2 are used as placeholder for argument names
+   */
   constructor(name: OpcodeName, description: string, signature?: Signature) {
     this.name = name;
     this.signature = signature;
