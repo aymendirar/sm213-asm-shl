@@ -5,7 +5,7 @@ export function activate(context: vscode.ExtensionContext) {
   // This line of code will only be executed once when your extension is activated
   console.log('Congratulations, your extension "SM213" is now active!');
 
-	
+
   context.subscriptions.push(EASTER_EGG);
   context.subscriptions.push(HOVER_DEFN);
 }
@@ -197,7 +197,7 @@ const OPCODES = new Map<OpcodeName, Opcode>([
   [
     "not",
     new Opcode("not", "performs bitwise logical not on value stored in $1", {
-      arg1: new Argument("val1", ["register"]),
+      arg1: new Argument("val", ["register"]),
     }),
   ],
   [
@@ -217,25 +217,25 @@ const OPCODES = new Map<OpcodeName, Opcode>([
   [
     "inc",
     new Opcode("inc", "increments value stored in $1 by 1", {
-      arg1: new Argument("val1", ["register"]),
+      arg1: new Argument("val", ["register"]),
     }),
   ],
   [
     "inca",
     new Opcode("inca", "increments value stored in $1 by 4", {
-      arg1: new Argument("val1", ["register"]),
+      arg1: new Argument("val", ["register"]),
     }),
   ],
   [
     "dec",
     new Opcode("dec", "decrements value stored in $1 by 1", {
-      arg1: new Argument("val1", ["register"]),
+      arg1: new Argument("val", ["register"]),
     }),
   ],
   [
     "deca",
     new Opcode("deca", "decrements value stored in $1 by 4", {
-      arg1: new Argument("val1", ["register"]),
+      arg1: new Argument("val", ["register"]),
     }),
   ],
 ]);
