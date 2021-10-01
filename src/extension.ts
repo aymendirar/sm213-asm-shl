@@ -5,20 +5,16 @@ export function activate(context: vscode.ExtensionContext) {
   // This line of code will only be executed once when your extension is activated
   console.log('Congratulations, your extension "SM213" is now active!');
 
-
   context.subscriptions.push(EASTER_EGG);
   context.subscriptions.push(HOVER_DEFN);
 }
 
 /** a secret */
-const EASTER_EGG = vscode.commands.registerCommand(
-  "sm213-assembly-syntax-highlighting.credit",
-  () => {
-    // Display a message box to the user
-    // Command has to be declared in package.json first
-    vscode.window.showInformationMessage("0000 - 2021 Humanity!");
-  }
-);
+const EASTER_EGG = vscode.commands.registerCommand("sm213-assembly-syntax-highlighting.credit", () => {
+  // Display a message box to the user
+  // Command has to be declared in package.json first
+  vscode.window.showInformationMessage("0000 - 2021 Humanity!");
+});
 
 // Below Part of the code is for implementation of Hovering
 
@@ -31,12 +27,13 @@ const HOVER_DEFN = vscode.languages.registerHoverProvider(
       const word = document.getText(range);
       // const hoverMsg: vscode.MarkdownString = new vscode.MarkdownString().appendText('GTFO!');
       // hoverMsg.isTrusted = true;
+      console.log(word);
       if (isOpcodeName(word) && OPCODES.has(word)) {
         return new vscode.Hover(OPCODES.get(word)!.markdownDesc);
       }
       // return new vscode.Hover(hoverMsg);
     },
-  }
+  },
 );
 
 // Added to leverage strict type checking by typescript (prevent typo)
@@ -129,16 +126,10 @@ class Opcode {
     this.description = description;
     // Format description from signature
     if (this.signature?.arg1) {
-      this.description = this.description.replace(
-        "$1",
-        String.raw`\<${this.signature.arg1.argName}\>`
-      );
+      this.description = this.description.replace("$1", String.raw`\<${this.signature.arg1.argName}\>`);
     }
     if (this.signature?.arg2) {
-      this.description = this.description.replace(
-        "$2",
-        String.raw`\<${this.signature.arg2.argName}\>`
-      );
+      this.description = this.description.replace("$2", String.raw`\<${this.signature.arg2.argName}\>`);
     }
 
     // Generate markdownDesc
