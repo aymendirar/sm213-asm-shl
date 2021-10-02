@@ -25,13 +25,9 @@ const HOVER_DEFN = vscode.languages.registerHoverProvider(
     provideHover(document, position, token) {
       const range = document.getWordRangeAtPosition(position);
       const word = document.getText(range);
-      // const hoverMsg: vscode.MarkdownString = new vscode.MarkdownString().appendText('GTFO!');
-      // hoverMsg.isTrusted = true;
-      console.log(word);
       if (isOpcodeName(word) && OPCODES.has(word)) {
         return new vscode.Hover(OPCODES.get(word)!.markdownDesc);
       }
-      // return new vscode.Hover(hoverMsg);
     },
   },
 );
