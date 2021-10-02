@@ -1,77 +1,77 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "SM213 Assembly",
-    "patterns": [
-        {
-            "include": "#keywords"
-        },
-        {
-            "include": "#constant"
-        },
-        {
-            "include": "#comments"
-        },
-        {
-            "include": "#variables"
-        },
-        {
-            "include": "#functions"
-        }
-    ],
-    "repository": {
-        "keywords": {
-            "patterns": [
-                {
-                    "name": "keyword.directive.asm",
-                    "match": "\\.(pos|long)"
-                },
-                {
-                    "name": "keyword.instruction.asm",
-                    "match": "(ld|st|halt|nop|mov|add|and|inc|inca|dec|deca|not|shl|shr|br|beq|bgt|j|gpc)\\s"
-                }
-            ]
-        },
-        "constant": {
-            "patterns": [
-                {
-                    "name": "constant.numeric.hex.asm",
-                    "match": "\\$?(0x|0X)[a-fA-F\\d]+"
-                },
-                {
-                    "name": "constant.numeric.dec.asm",
-                    "match": "\\$?\\d+"
-                }
-            ]
-        },
-        "comments": {
-            "patterns": [
-                {
-                    "name": "comment.line",
-                    "begin": "#",
-                    "end": "\n"
-                }
-            ]
-        },
-        "variables": {
-            "patterns": [
-                {
-                    "name": "variable.registers.asm",
-                    "match": "r[0-7]"
-                }
-            ]
-        },
-        "functions": {
-            "patterns": [
-                {
-                    "name": "entity.name.function.label.asm",
-                    "match": "\\w+\\:"
-                },
-                {
-                    "name": "entity.name.function.variable.asm",
-                    "match": "\\$\\w+\\b"
-                }
-            ]
-        }
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "SM213 Assembly",
+  "patterns": [
+    {
+      "include": "#keywords"
     },
-    "scopeName": "source.asm"
+    {
+      "include": "#constant"
+    },
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#variables"
+    },
+    {
+      "include": "#functions"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.directive.asm",
+          "match": "\\.(pos|long)"
+        },
+        {
+          "name": "keyword.instruction.asm",
+          "match": "(ld|st|halt|nop|mov|add|and|inc|inca|dec|deca|not|shl|shr|br|beq|bgt|j|gpc)\\s"
+        }
+      ]
+    },
+    "constant": {
+      "patterns": [
+        {
+          "name": "constant.numeric.hex.asm",
+          "match": "\\$?(0x|0X)[a-fA-F\\d]+"
+        },
+        {
+          "name": "constant.numeric.dec.asm",
+          "match": "\\$?\\d+"
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line",
+          "begin": "#",
+          "end": "\n"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.registers.asm",
+          "match": "r[0-7]"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "name": "entity.name.function.label.asm",
+          "match": "\\w+\\:"
+        },
+        {
+          "name": "entity.name.function.variable.asm",
+          "match": "\\$\\w+\\b"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.asm"
 }
