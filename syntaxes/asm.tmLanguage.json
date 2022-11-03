@@ -27,7 +27,7 @@
         },
         {
           "name": "keyword.instruction.asm",
-          "match": "(ld|st|halt|nop|mov|add|and|inc|inca|dec|deca|not|shl|shr|br|beq|bgt|j|gpc)\\s"
+          "match": "(ld|st|halt|nop|mov|add|and|inc|inca|dec|deca|not|shl|shr|br|beq|bgt|j|gpc|sys)\\s"
         }
       ]
     },
