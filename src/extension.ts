@@ -55,6 +55,7 @@ const opcodeNames = [
   "j",
   "halt",
   "nop",
+  "sys",
 ] as const;
 
 type OpcodeName = typeof opcodeNames[number];
@@ -159,6 +160,12 @@ const OPCODES = new Map<OpcodeName, Opcode>([
     }),
   ],
   ["halt", new Opcode("halt", "stops execution")],
+  [
+    "sys",
+    new Opcode("sys", "runs the system call specified by $1", {
+      arg1: new Argument("val", ["immediate"]),
+    }),
+  ],
   [
     "mov",
     new Opcode("mov", "moves value from register $1 to register $2", {
