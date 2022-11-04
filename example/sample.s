@@ -28,6 +28,7 @@
   j 8(r1)
   j *8(r1)
   j *(r1, r2, 4)
+  sys $2
 
 .pos 0x1000
 a:    .long 0xffffffff # a
