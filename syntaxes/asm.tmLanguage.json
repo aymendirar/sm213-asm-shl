@@ -35,11 +35,11 @@
       "patterns": [
         {
           "name": "constant.numeric.hex.asm",
-          "match": "\\$?(0x|0X)[a-fA-F\\d]+"
+          "match": "\\$-??(0x|0X)[a-fA-F\\d]+"
         },
         {
           "name": "constant.numeric.dec.asm",
-          "match": "\\$?\\d+"
+          "match": "\\$-??\\d+"
         }
       ]
     },
