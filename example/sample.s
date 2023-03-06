@@ -4,6 +4,8 @@
   ld $0x1000, r1
   ld $a, r1
   ld $arr, r1
+  ld $label_with_underscores, r1
+  ld $-42, r4
   ld 4(r2), r3
   ld (r1, r2, 4), r3
   st r1, 8(r3)
