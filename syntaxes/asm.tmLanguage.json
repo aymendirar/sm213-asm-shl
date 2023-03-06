@@ -64,7 +64,7 @@
       "patterns": [
         {
           "name": "entity.name.function.label.asm",
-          "match": "\\w+\\:"
+          "match": "[\\w_]+\\:"
         },
         {
           "name": "entity.name.function.variable.asm",
